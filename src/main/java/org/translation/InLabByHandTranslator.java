@@ -5,7 +5,8 @@ import java.util.List;
 
 // TODO Task: modify this class so that it also supports the Spanish language code "es" and
 //            one more language code of your choice. Each member of your group should add
-//            support for one additional langauge code on a branch; then push and create a pull request on GitHub.
+//            (I added Japanese and Spanish already)
+//            support for one additional language code on a branch; then push and create a pull request on GitHub.
 
 // Extra Task: if your group has extra time, you can add support for another country code in this class.
 
@@ -26,7 +27,7 @@ public class InLabByHandTranslator implements Translator {
     @Override
     public List<String> getCountryLanguages(String country) {
         if (canada.equals(country)) {
-            return new ArrayList<>(List.of("de", "en", "zh"));
+            return new ArrayList<>(List.of("de", "en", "zh", "es", "ja"));
         }
         return new ArrayList<>();
     }
@@ -58,6 +59,12 @@ public class InLabByHandTranslator implements Translator {
         //        }
         if ("de".equals(language)) {
             name = "Kanada";
+        }
+        if ("es".equals(language)) {
+            name = "Canadá";
+        }
+        if ("ja".equals(language)) {
+            name = "カナダ";
         }
         else if ("en".equals(language)) {
             name = "Canada";
