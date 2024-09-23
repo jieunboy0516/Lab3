@@ -14,7 +14,7 @@ import java.util.Map;
 public class LanguageCodeConverter {
 
     // TODO Task: pick appropriate instance variables to store the data necessary for this class
-
+    private Map<String, String> languageCodeMap;
     /**
      * Default constructor which will load the language codes from "language-codes.txt"
      * in the resources folder.
@@ -36,12 +36,19 @@ public class LanguageCodeConverter {
 
             // TODO Task: use lines to populate the instance variable
             //           tip: you might find it convenient to create an iterator using lines.iterator()
+            for (String line : lines) {
+                String[] parts = line.split("\\t");
+
+                if (parts.length == 2) {
+                    this.languageCodeMap.put(parts[1].trim(), parts[0].trim());
+                }
+            }
 
         // TODO Checkstyle: '}' on next line should be alone on a line.
-        } catch (IOException | URISyntaxException ex) {
+        }
+        catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);
         }
-
     }
 
     /**
@@ -51,7 +58,7 @@ public class LanguageCodeConverter {
      */
     public String fromLanguageCode(String code) {
         // TODO Task: update this code to use your instance variable to return the correct value
-        return code;
+        return languageCodeMap.getOrDefault(code, "Unknown code");
     }
 
     /**
@@ -61,7 +68,12 @@ public class LanguageCodeConverter {
      */
     public String fromLanguage(String language) {
         // TODO Task: update this code to use your instance variable to return the correct value
-        return language;
+        for (Map.Entry<String, String> entry : languageCodeMap.entrySet()) {
+            if (entry.getValue().equalsIgnoreCase(language)) {
+                return entry.getKey();
+            }
+        }
+        return "Unknown language";
     }
 
     /**
@@ -70,6 +82,6 @@ public class LanguageCodeConverter {
      */
     public int getNumLanguages() {
         // TODO Task: update this code to use your instance variable to return the correct value
-        return 0;
+        return languageCodeMap.size();
     }
 }
