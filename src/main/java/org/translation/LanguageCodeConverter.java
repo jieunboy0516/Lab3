@@ -19,6 +19,7 @@ public class LanguageCodeConverter {
      * Default constructor which will load the language codes from "language-codes.txt"
      * in the resources folder.
      */
+
     public LanguageCodeConverter() {
         this("language-codes.txt");
     }
@@ -46,7 +47,7 @@ public class LanguageCodeConverter {
                 }
             }
 
-        //  Checkstyle: '}' on next line should be alone on a line.
+            //  Checkstyle: '}' on next line should be alone on a line.
         }
         catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);

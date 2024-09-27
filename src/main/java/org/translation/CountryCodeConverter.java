@@ -12,6 +12,9 @@ import java.util.Map;
  * This class provides the service of converting country codes to their names.
  */
 public class CountryCodeConverter {
+
+    private static final int THREE = 3;
+
     private Map<String, String> countryToCode;
     private Map<String, String> codeToCountry;
 
@@ -44,7 +47,7 @@ public class CountryCodeConverter {
                 String[] parts = line.split("\t");
 
                 // Expecting the format: countryName, alpha-2, alpha-3, numeric code (ignore numeric code)
-                if (parts.length >= 3) {
+                if (parts.length >= THREE) {
                     String country = parts[0].trim();
                     String alpha3 = parts[2].trim();
                     codeToCountry.put(alpha3, country);
