@@ -36,13 +36,19 @@ public class CountryCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    String code = parts[0].trim();
-                    String country = parts[1].trim();
-                    codeToCountry.put(code, country);
-                    countryToCode.put(country, code);
+            // Start the loop from index 1 to skip the first line (header)
+            for (int i = 1; i < lines.size(); i++) {
+                String line = lines.get(i);
+
+                // Splitting the line by tab characters
+                String[] parts = line.split("\t");
+
+                // Expecting the format: countryName, alpha-2, alpha-3, numeric code (ignore numeric code)
+                if (parts.length >= 3) {
+                    String country = parts[0].trim();
+                    String alpha3 = parts[2].trim();
+                    codeToCountry.put(alpha3, country);
+                    countryToCode.put(country, alpha3);
                 }
             }
 
@@ -59,7 +65,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        return codeToCountry.get(code);
+        return codeToCountry.get(code.toUpperCase());
     }
 
     /**
