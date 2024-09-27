@@ -49,7 +49,7 @@ public class JSONTranslationExample {
     public String getCountryNameTranslation(String countryCode, String languageCode) {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject countryObject = jsonArray.getJSONObject(i);
-            if (countryObject.getString("countryCode").equalsIgnoreCase(countryCode)) {
+            if (countryObject.getString("alpha3").equalsIgnoreCase(countryCode)) {
                 return countryObject.optString(languageCode, "Translation not found for this language");
             }
         }
