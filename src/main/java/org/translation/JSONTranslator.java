@@ -10,7 +10,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 /**
  * An implementation of the Translator interface which reads in the translation
  * data from a JSON file. The data is read in once each time an instance of this class is constructed.
@@ -19,6 +18,7 @@ public class JSONTranslator implements Translator {
 
     // TODO Task: pick appropriate instance variables for this class
 
+    private static final String ALPHA3_KEY = "alpha3";
     private JSONArray jsonArray;
 
     /**
@@ -57,9 +57,9 @@ public class JSONTranslator implements Translator {
         List<String> languages = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject countryObj = jsonArray.getJSONObject(i);
-            if (countryObj.getString("alpha3").equalsIgnoreCase(country)) {
+            if (countryObj.getString(ALPHA3_KEY).equalsIgnoreCase(country)) {
                 for (String key : countryObj.keySet()) {
-                    if (!key.equals("id") && !key.equals("alpha2") && !key.equals("alpha3")) {
+                    if (!"id".equals(key) && !"alpha2".equals(key) && !ALPHA3_KEY.equals(key)) {
                         languages.add(key);
                     }
                 }
@@ -76,7 +76,7 @@ public class JSONTranslator implements Translator {
         List<String> countries = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject countryObj = jsonArray.getJSONObject(i);
-            countries.add(countryObj.getString("alpha3"));
+            countries.add(countryObj.getString(ALPHA3_KEY));
         }
         return countries;
     }
@@ -86,7 +86,7 @@ public class JSONTranslator implements Translator {
         // TODO Task: complete this method using your instance variables as needed
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject countryObj = jsonArray.getJSONObject(i);
-            if (countryObj.getString("alpha3").equalsIgnoreCase(country)) {
+            if (countryObj.getString(ALPHA3_KEY).equalsIgnoreCase(country)) {
                 return countryObj.optString(language, null);
             }
         }
