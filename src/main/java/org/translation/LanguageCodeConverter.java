@@ -30,6 +30,8 @@ public class LanguageCodeConverter {
      */
     public LanguageCodeConverter(String filename) {
 
+        this.languageCodeMap = new HashMap<>();
+
         try {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
